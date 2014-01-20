@@ -6,10 +6,10 @@
 -- statusTimer()    will it blend? not sure if this really works. but we'll see.
 --                  beats doing it through rc.lua.
 
-
-local wibox = require("wibox")
-battery_widget = wibox.widget.textbox()
-battery_widget:set_align("right")
+--disabled during testing
+--local wibox = require("wibox")
+--battery_widget = wibox.widget.textbox()
+--battery_widget:set_align("right")
 
 local capacityCMD = "cat /sys/class/power_supply/BAT0/capacity"
 local statusCMD = "cat /sys/class/power_supply/BAT0/status"
@@ -49,15 +49,33 @@ function genBatteryStatus()
     return (power .. " " .. capacity)
 end
 
+function updateLoop(interval) -- seconds
+    os.execute("sleep " .. interval)
+    updateBattery1()
+    updateLoop(interval)
+end
+
+function updateBattery1()
+    local battery = genBatteryStatus()
+    print(battery)
+end
+
+
 function updateBattery(widget)
     local battery = genBatteryStatus()
     print(battery)
     widget:set_markup(battery)
 end
 
+updateLoop(1)
 
-updateBattery(battery_widget)
 
-mytimer = timer({ timeout = 0.5 })
-mytimer:connect_signal("timeout", function () updateBattery(battery_widget) end)
-mytimer:start()
+
+
+
+
+-- updateBattery(battery_widget)
+
+-- mytimer = timer.get({ timeout = 0.5 })
+-- mytimer:connect_signal("timeout", function () genBatteryStatus() end)
+-- mytimer:start()

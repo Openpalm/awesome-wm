@@ -29,7 +29,7 @@ local function getBatteryCharge()
     local file = io.popen(statusCMD)
     local output = file:read("*all")
     file:close()
-    if string.find(output,"ing") then return false
+    if string.find(output,"Dis") then return false
     end
     return true
 end
@@ -55,8 +55,9 @@ function updateBattery(widget)
     widget:set_markup(battery)
 end
 
+
 updateBattery(battery_widget)
 
-mytimer = timer({ timeout = 1 })
+mytimer = timer({ timeout = 0.5 })
 mytimer:connect_signal("timeout", function () updateBattery(battery_widget) end)
 mytimer:start()
