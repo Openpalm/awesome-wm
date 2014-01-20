@@ -436,8 +436,9 @@ mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesom
                               client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
                               client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
                               -- }}}
-
+                              -- battey loop
+                              --
+                              -- Battery status timer
                               -- autostart
-
                               runOnce.run("yakuake &")
                               runOnce.run("nm-applet &")
