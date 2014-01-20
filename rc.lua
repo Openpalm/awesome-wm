@@ -7,6 +7,8 @@ awful.rules = require("awful.rules")
 require("awful.autofocus")
 -- Widget and layout library
 local wibox = require("wibox")
+-- my widgets
+require("battery")
 require("volume")
 -- Theme handling library
 local beautiful = require("beautiful")
@@ -189,6 +191,7 @@ mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesom
                                   -- Widgets that are aligned to the right
                                   local right_layout = wibox.layout.fixed.horizontal()
                                   if s == 1 then right_layout:add(wibox.widget.systray()) end
+                                  right_layout:add(battery_widget)
                                   right_layout:add(volume_widget)
                                   right_layout:add(mytextclock)
                                   right_layout:add(mylayoutbox[s])
@@ -440,5 +443,5 @@ mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesom
                               --
                               -- Battery status timer
                               -- autostart
-                              runOnce.run("yakuake &")
-                              runOnce.run("nm-applet &")
+                              runOnce.run("yakuake")
+                              runOnce.run("nm-applet")

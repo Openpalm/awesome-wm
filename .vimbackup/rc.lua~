@@ -7,6 +7,8 @@ awful.rules = require("awful.rules")
 require("awful.autofocus")
 -- Widget and layout library
 local wibox = require("wibox")
+-- my widgets
+require("battery")
 require("volume")
 -- Theme handling library
 local beautiful = require("beautiful")
@@ -441,5 +443,5 @@ mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesom
                               --
                               -- Battery status timer
                               -- autostart
-                              runOnce.run("yakuake &")
-                              runOnce.run("nm-applet &")
+                              runOnce.run("yakuake")
+                              runOnce.run("nm-applet")
